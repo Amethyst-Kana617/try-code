@@ -8,7 +8,7 @@ for
 其中的[i][j]指代的是[2][4]。运行二维数组的行下标0、1，列下标0、1、2、3。
 for嵌套执行顺序是从外到里再从里到外。
 
-for循环和while循环区别在一个先判断条件再执行，一个先执行再判断条件。
+for循环和while循环区别在一个先满足条件再执行，一个先判断(归类布尔数)再执行。do while循环是先执行再判断。
 
 int double_list[2][4] ={{1, 2, 3, 4}, {5, 6, 7, 8}};
 int i = 0;
@@ -81,3 +81,27 @@ i = 0，j = 0；
 循环嵌套中，循环的顺序选择是至关重要的。
 嵌套的循环控制变量不能相同；
 外层循环可包含两个以上内循环，但不能相互交叉。
+
+int score_list[5] = {20, 30, 5, -1, 50};
+for
+(int i = 0; i < 5; i++){
+    if(score_list[i] <= 0){
+        printf("game over\n");
+        break;
+    }
+    printf("%d\n", score_list[i]);
+}
+
+20
+30
+5
+game over
+break循环终止
+
+-------------------------------------------------
+//if判断if (5 > 1) {    printf("5>1\n");}
+//if-else判断if (1 > 5) {    printf("1 > 5\n");} else {    printf("1 < 5\n");}
+//else if判断if (1 > 5) {    printf("1 > 5\n");} else if(1 == 5) {    printf("1 == 5\n");} else {    printf("1 < 5\n");}
+//for循环for(int i =0;i < 5;i++) {    printf("%d\n", i);}
+//while循环while(true){   printf("true!\n");}
+//break & continueint i = 0;while(true){   printf("true!\n");    i++;    if(i < 5){       continue;    } else {        break;    }}
