@@ -114,3 +114,205 @@ int AddThreeNumber(int num_a, int num_b, int num_c)
 }
 //int\return\number_d对应函数返回值的三部分：类型\关键字\具体数值。
 函数的参数是外界对函数输入的部分。函数返回值是函数对外界输出的部分。不输出就写void。
+函数返回值return的主要作用是终止函数执行，并将函数结果返回给调用的地方。如果数据类型用了viod，结果会返回但是不显示，也就是没有返回值。
+---------------------------------------------------
+int *p1 = NULL;
+用指针前可以先给个空地址(NULL)，要用时再给变量名。
+*是指针运算符&是取地址运算符。
+float a = 5.0;
+float b = 1.0;
+float *p1;
+p1 = &a;
+printf("%.1f\n", *p1);
+p1 = &b;
+printf("%.1f\n", *p1)
+
+%p输出指针地址，%d输出整型数值，%f输出浮点数值。
+
+指针还可以修改指向变量的值。(*p)++是先指针，再自增
+int a = 1;
+int *p;
+p = &a;
+printf("%d\n", *p);
+(*p)++;
+printf("%d\n", *p);
+-----------
+int a = 1;
+int *p;  //定义一个整型指针
+p = &a;  //让指针指向变量a的地址
+*p = 100;  //通过指针修改存储在变量a的地址中的值
+(*p)++;  //自增
+(*p)--; //自减
+*p = *p * 10;  //乘法
+*p = *p + 10; //加法
+对于指针的应用我们需要记住的是，一旦某个指针指向了变量，这时候这个指针就和这个变量关联上了。
+对这个指针进行数据赋值和修改，就等同于对这个变量进行数据的赋值和修改，反之亦然。
+
+-----------------------------------
+int num_list[5] = {0, 1, 2, 3, 4};
+int *p1;
+p1 = &num_list[2];
+printf("%d\n", *p1);
+*p1 = 20;
+printf("%d\n", *p1);
+---------------
+int num_list[5] = {10, 20, 30, 40, 50};
+int *p1;
+p1 = num_list;
+printf("%d\n", *p1);
+printf("%d\n", *(p1+1));
+//我们注意到，当用指针指向一个数组的时候，*p就是数组的第一个元素，*(p+1)就是数组的第二个元素，同理*(p+2)是数组的第三个元素：
+//为了方便记忆，可以记忆为*(p+0)或*p1是数组的第一个元素，*(p+1)是数组的第二个元素，*(p+2)是数组的第三个元素；
+//指针后面加的数字，等同于数组的下标。
+//指针指向数组的时候，我们是没有使用取地址符&的。因为数组名存的也是一个内存地址，和指针一样
+int num_list[5] = {10, 20, 30, 40, 50};
+int *p1;
+p1 = num_list;
+printf("%d\n", *p1);
+printf("%d\n", *(num_list+1));
+//
+int num_list[5] = {10, 20, 30, 40, 50};
+int *p1;
+p1 = &num_list[1];  //指针指向数组第2个元素
+printf("%d\n", *p1);
+p1 = num_list;  //指针指向整个数组
+printf("%d\n", *p1);
+//同时这里我们也需要注意*(p+1)和*p+1的不同之处
+前者是某个数组的第二个元素的值，后者是某个指针指向的数值再加一。
+int num_list[5] = {10, 20, 30, 40, 50};
+int *p1;
+p1 = num_list;
+printf("%d\n", *p1);
+printf("%d\n", *(p1+1));
+printf("%d\n", *p1+1);
+以及指针和数组都需要注意的事也类似，就是数组是有边界的，不能越界访问。
+比如数组的长度是10，*(p1+20)和num_list[20]都是会报错的。
+void AddTen(int *p1){
+    *p1 = *p1 + 10;
+}
+int main(){
+    int number_1 = 10;
+    int *p;
+    p = &number_1;
+    AddTen(p);
+    printf("%d\n", *p);
+    printf("%d\n", number_1);
+}
+//指针作为函数参数使用案例
+void AddTen(int *p1){
+    *p1 = *p1 + 10;
+}
+int main(){
+    int number_1 = 10;
+    int *p;
+    p = &number_1;
+    AddTen(p); //number_1中的值被永久改变
+    printf("%d\n", *p);
+    printf("%d\n", number_1);
+}
+现在我们可能能够更能体会为什么说指针是C语言中很灵活很底层的机制了。
+因为有些机制是基于指针的，比如数组和数组名。
+有些机制在使用指针的时候，会方便快捷，甚至打破规则的操作原始数据，比如函数的指针参数。
+----------------------------------------------------------------
+struct结构体，可以包含多种数据类型
+struct Book
+{
+    char name[20]; 
+    int pages;     
+    float price;   
+};  
+struct Book book_a;
+//book_a是结构体的变量，包含了三个成员变量：name、pages、price。
+
+struct
+结构体关键字
+ Book
+{
+    char name[20]; 
+    int pages;     
+    float price;   
+};  
+struct Book book_a = {"ABC", 100, 15.0};  //定义结构体变量book_a 并赋值
+
+//struct的定义需要在main函数前面（外部），就像函数的定义一样。
+
+struct Record
+{
+    float yuwen;
+    float shuxue;
+    float yingyu;
+};
+int main() {
+    struct Record record_2023;
+    record_2023.yuwen = 99.5;
+    record_2023.shuxue = 100.0;
+    record_2023.yingyu = 98.5;
+}
+结构体变量访问自己成员是通过英文句号.来实现的：
+
+struct Record
+{
+    float yuwen;
+    float shuxue;
+    float yingyu;
+};
+int main() {
+    struct Record record_2025 = {90.0, 93.5, 98.0};
+    printf("%.1f\n", record_2025.yuwen);
+    printf("%.1f\n", record_2025.shuxue);
+    printf("%.1f\n", record_2025.yingyu);
+}
+
+-------------------
+struct Record
+{
+    float yuwen;
+    float shuxue;
+    float yingyu;
+};
+int main() {
+    struct Record 
+record_2025
+ = {90.0, 93.5, 98.0};
+    printf("%.1f\n", record_2025.yuwen);
+    record_2025.yuwen = 100.0;
+    printf("%.1f\n", record_2025.yuwen);
+}
+//结果是90.0
+        100.0
+
+//指针可以用来指向结构体
+
+struct Record
+{
+    float yuwen;
+    float shuxue;
+    float yingyu;
+};
+int main() {
+    struct Record record_2025 = {90.0, 93.5, 98.0};
+    struct Record *sp1;
+    sp1 = &record_2025; 
+    printf("%f\n", sp1->yuwen);
+    sp1->yuwen = 100.0;
+    printf("%f\n", sp1->yuwen);
+}
+//一个结构体的指针和一个普通变量的指针，在使用上最大的区别就是，普通变量的指针需要使用指针运算符*来访问，结构体的指针则不需要。
+使用结构体变量访问成员的时候，是用英文句号.
+使用结构体指针来访问成员的时候，是用减号+右箭头符号->
+struct Record record_2025 = {90.0, 93.5, 98.0};
+struct Record *sp1;
+sp1 = &record_2025; 
+printf("%.1f\n", sp1->yuwen);
+sp1->yuwen = 100.0;
+printf("%.1f\n", sp1->yuwen);
+//结果是90.0
+        100.0.
+        
+struct Record record_2023;
+record_2023.
+英文句号
+yuwen = 99.5;   //访问单个结构体成员
+struct Record *sp1;  //定义Record结构体指针sp1
+sp1 = &record_2023; //指针指向结构体变量
+printf("%.1f\n", sp1->yuwen);  //指针访问结构体变量成员
