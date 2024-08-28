@@ -105,3 +105,12 @@ break循环终止
 //for循环for(int i =0;i < 5;i++) {    printf("%d\n", i);}
 //while循环while(true){   printf("true!\n");}
 //break & continueint i = 0;while(true){   printf("true!\n");    i++;    if(i < 5){       continue;    } else {        break;    }}
+
+-------------------------------------------------
+int AddThreeNumber(int num_a, int num_b, int num_c)
+{
+    int number_d = num_a + num_b + num_c;
+    return number_d;
+}
+//int\return\number_d对应函数返回值的三部分：类型\关键字\具体数值。
+函数的参数是外界对函数输入的部分。函数返回值是函数对外界输出的部分。不输出就写void。
